@@ -1,0 +1,57 @@
+
+<div class="col-md-12" th:fragment="navbar">
+	<nav class="navbar fixed-top navbar-expand-sm navbar-dark"
+		style="background-color: rgba(52, 58, 64, 1);">
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="nav-item active"><a class="ml-3 navbar-brand"
+			href="/inicial">ST</a></div>
+		<div class="collapse navbar-collapse " id="navbarNav">
+
+<!-- 			<ul class="navbar-nav"> -->
+
+<!-- 				<li id="shows-menu" class="nav-item"><a class="nav-link" href="#target-element"> -->
+<!-- 						Shows  </a></li> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
+			<ul sec:authorize="not isAuthenticated()" class="ml-auto navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="/inicial/login">
+						<i class="fas fa-sign-in-alt"></i> Entrar 
+				</a></li>
+			</ul>
+		
+			<ul sec:authorize="isAuthenticated()" class="ml-auto navbar-nav ml-auto">
+				<li sec:authorize="hasAuthority('ADMINISTRADOR')" class="nav-item"><a class="mr-3 nav-link" href="/administrativo">
+						<i class="fas fa-solar-panel mr-2"></i> Painel administrativo 
+				</a></li>
+				
+				
+					<li sec:authorize="hasAuthority('USUARIO')" class="nav-item"><a class="mr-3 nav-link" href="/compras">
+						<i class="fas fa-money-bill-wave mr-2"></i></i>Minhas compras 
+				</a></li>
+				
+				
+				<li sec:authorize="hasAuthority('USUARIO')" class="nav-item"><a class="mr-3 nav-link" href="/perfil">
+						<i class="fas fa-user mr-2"></i>Meu Perfil 
+				</a></li>
+				
+				<li sec:authorize="isAuthenticated()" class="nav-item">
+						<a th:href="@{/logout}" class="nav-link">
+							<i class="fas fa-sign-out-alt"></i> Sair
+						</a>
+					</li>
+					
+			</ul>
+			
+			
+
+		</div>
+
+
+	</nav>
+</div>
+

@@ -1,0 +1,28 @@
+.background{
+	
+    background-image: url("/layout/images/No Logo Ubu 03.png");
+}
+
+.btn-compra{
+
+	background-color: #4e002f !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.btn-compra:hover{
+
+    background-color: #880454 !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.form-control:focus {
+	
+    border-color: rgba(78, 0, 47, 0.2);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(78, 0, 47, 0.6);
+  }
+  
+  .swal2-close{
+  
+  	outline: none !important;
+  	color: red !important;
+  }

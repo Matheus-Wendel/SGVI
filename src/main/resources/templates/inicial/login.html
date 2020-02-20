@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html  lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" th:href="@{/layout/images/iconpage.ico}">
+    <link rel="stylesheet" th:href="@{/layout/stylesheets/inicial/login.css}">
+    <link rel="stylesheet" th:href="@{/layout/stylesheets/geral/geral.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    
+    <title>SGVI | Login</title>
+</head>
+
+<body>
+	
+    <div class="container-fluid background"
+        style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="card-login">
+                    <form action="/inicial/login" method="post">
+
+                        <div class="card-body">
+                            <h5 class="card-title text-center">SourceTickets</h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center" style="font-size: 16px !important;">Conectar-se</h6>
+                            <hr
+                                style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+                            <input id="usuario-login" type="text" name="username" class="form-control" maxlength="64" placeholder="E-mail">
+                            <input id="senha-login" type="password" name="password" class="mt-3 form-control" maxlength="16" placeholder="Senha">
+                        </div>
+                        <div class="col-md-12 mb-3 justify d-flex justify-content-center">
+                            <button type="submit" class="btn btn-roxo btn-block">Entrar</button>
+                        </div>
+                    </form>
+                    <div class="col-md-12 text-center">
+                        <p style="font-size: 14px;">Ainda não possui cadastro? <a href="#" id="cadastrar"> Cadastre-se!</a></p>
+                    </div>
+                </div>
+
+             <form id="cadastrar-form" action="/cliente/cadastro"  method="post">
+
+                <div class="card" id="card-cadastro" style="display: none;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">SourceTickets</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" style="font-size: 16px !important;">Cadastrar-se</h6>
+                        <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+
+                        <p class="info text-muted mb-4 mt-4">Informações Pessoais</p>
+                        <div class="row">
+                        	<div class="col-md-6">
+                        		<input id="usuario-cadastro" name="nome" type="text" maxlength="320" placeholder="Nome completo" class="form-control">
+                        	</div>
+                        	<div class="col-md-6">
+                        		<input id="cpf-cadastro" name="cpf" type="text" maxlength="11" placeholder="CPF" class="form-control">
+                        	</div>
+                        </div>
+                        <div class="row">
+                        	<div class="col-md-6">
+                        		<input id="data-nascimento" name="dataNascimento" type="text" placeholder="Data de Nascimento" class="mt-3 form-control" onfocus="(this.type='date')" onblur="(this.type='text')">
+                        	</div>
+                        	<div class="col-md-6">
+                        		<input id="tel-cadastro" name="telefone" type="text" placeholder="Telefone" class="mt-3 form-control">
+                        	</div>
+                        </div>
+                        <p class="mt-4 mb-4 info text-muted">Informações de Login</p>
+                        <div class="row">
+                        	<div class="col-md-12">
+                        		<input id="email" name="usuario.email" type="text" maxlength="32" placeholder="E-mail" class="form-control">
+                        	</div>
+                        </div>
+                        <div id="form-group-senhas-cadastrar" class=" form-group">
+	                        <div class="row">
+	                        	<div class="col-md-6">
+	                        		<input id="senha-cadastro" name="usuario.senha" type="password" maxlength="16" placeholder="Senha" class="mt-3 form-control">
+	                        	</div>
+	                        	<div class="col-md-6">
+	                        		<input id="senha-confirmar" type="password" maxlength="16" placeholder="Confirmar senha" class="mt-3 form-control">
+	                        	</div>
+	                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3 justify d-flex justify-content-center">
+                        <button id="btn-proximo" type="button" class="btn btn-roxo"> Próximo <i class="ml-2 fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <p style="font-size: 14px;">Já possui cadastro?<a href="#" id="entrar"> clique aqui para entrar!</a></p>
+                    </div>
+                </div>
+                <div class="card" id="card-cadastro-2" style="display: none;">
+                	<div class="card-body">
+                        <h5 class="card-title text-center">SourceTickets</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-center" style="font-size: 16px !important;">Cadastrar-se</h6>
+                        <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+                      	<div id="form-group-cadastro-2" class="form-group">
+                      		<div class="row">
+                                <div class="col-md-6">	
+                                    <select id="estados" name="endereco.cidade.estado.id" class="form-control">
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="cidade" name="endereco.cidade.id"  class="form-control">
+                                    	<option value="" selected>Cidade</option>
+                                    </select>
+                                </div>
+                            </div>
+                      	</div>
+                      	<div class="row mt-3">
+                            <div class="col-md-6">
+                                <input id="bairro" name="endereco.bairro" class="form-control" placeholder="Bairro">
+                            </div>
+                      		<div class="col-md-6">	
+                        		<input id="rua" name="endereco.rua" type="text" class="form-control" placeholder="Rua">
+                      		</div>
+                      	</div>
+                      	
+                      	<div class="row mt-3 mb-3">
+                        	<div class="col-md-6">	
+                        		<input id="numero" name="endereco.numero" onkeypress="return isNumberKey(event)" type="text" class="form-control" placeholder="Número">
+                      		</div>
+                      		<div class="col-md-6">
+                      			<input id="cep" name="endereco.cep" onkeypress="return isNumberKey(event)" type="text" class="form-control" placeholder="CEP">
+                        	</div>
+                      	</div>
+					</div>
+                    <div class="row mt-1 mb-2 text-center">
+						<div class="col-md-6">
+							<button id="btn-anterior" type="button" class="btn btn-roxo"><i class="fas fa-arrow-left"></i> Voltar </button>
+						</div>
+						<div class="col-md-6">
+							<button id="btn-cadastrar" type="submit" class="btn btn-success"> Cadastrar </button>
+						</div>
+                    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+    </div>
+
+
+	
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/livequery/1.1.1/jquery.livequery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script th:src="@{/layout/javascripts/inicial/login.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+</body>
+
+</html>

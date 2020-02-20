@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/th">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="icon" th:href="@{/layout/images/iconpage.ico}">
+<link rel="stylesheet"
+	th:href="@{/layout/stylesheets/compra/compra.css}">
+<link rel="stylesheet"
+	th:href="@{/layout/stylesheets/geral/geral.css}">
+	
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Staatliches&display=swap">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+
+<title>SGVI | Realizar Compra</title>
+</head>
+<body>
+	<form id="form-compra" name="compra" th:object="${evento}" action="/usuario/salvaCompra" method="post">
+		<div class="container-fluid background"
+			style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card" id="card-login">
+						<div class="card-body">
+							<i id="btn-voltar-2"
+								class="float-left fas fa-chevron-left btn-voltar mt-2 mb-4	" onclick="window.location.href='/'"></i><h5 class="card-title text-center">SourceTickets</h5>
+							<h6 class="card-subtitle mb-2 text-muted text-center"
+								style="font-size: 14px !important;">Preencha os campos
+								abaixo para concluir a compra</h6>
+							<hr
+								style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						</div>
+						<div class="row mb-3 justify-content-center p-0 m-0">
+							<div class="col-md-10">
+								<select name="setor.id" id="setores" class="form-control">
+									<option th:each="set: ${evento.setor}" th:id="${set.valor}" th:value="${set.id}" th:text="${set.descricao} + ': R$ ' + ${set.valor} + '0'"></option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-12 d-flex justify-content-center align-items-center">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="tipoCompraBonus" id="inlineRadio1" value="0">
+									<label class="form-check-label" for="inlineRadio1">Normal</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="tipoCompraBonus" id="inlineRadio2" value="1">
+									<label class="form-check-label" for="inlineRadio2">Bonus</label>
+								</div>
+							</div>
+						</div>
+						<div class="row justify-content-center p-0 m-0">
+							<div class="col-md-10 mb-4">
+								<input type="number" id="quantidadeIngressos" name="quantidadeIngressos" min="0" max="999"
+									maxlength="3" class="form-control"
+									placeholder="Nº de ingressos">
+							</div>
+						</div>
+
+						<div class="row justify-content-center p-0 m-0">
+							<div class="col-md-10">
+								<p class=" text-muted">Dados do cartão de crédito</p>
+							</div>
+						</div>
+						<div class="row justify-content-center p-0 m-0">
+							<div class="col-md-10 mb-2">
+								<input type="text" id="nomeTitularCartao" name="nomeTitularCartao" class="form-control"
+									placeholder="Nome do titular">
+							</div>
+						</div>
+						<div class="row mb-3 justify-content-center p-0 m-0">
+							<div class="mb-3 col-md-7 p-0 m-1">
+								<input type="text" id="numeroCartao" name="numeroCartao" class="form-control"
+									maxlength="16" placeholder="Numero do cartão">
+							</div>
+							<div class="mb-3 col-md-2 p-0 m-1">
+								<input type="text" id="cvvCartao" name="cvvCartao" class="form-control" maxlength="3"
+									placeholder="CVV">
+							</div>
+						</div>
+						
+						<div class="row justify-content-center p-0 m-0">
+							<div class="col-md-10 mb-4">
+								<label for="valor-total" class="text-muted">Valor total</label>
+								<input type="text" id="valor-total" class="form-control"
+									value="R$ " disabled>
+							</div>
+						</div>
+						<div class="row mt-3 justify-content-center p-0 m-0">
+							<div class="col-md-10 mb-4 justify d-flex justify-content-center">
+								<button type="submit" class="btn btn-primary btn-compra btn-block">Comprar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/livequery/1.1.1/jquery.livequery.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script th:src="@{/layout/javascripts/compra/compra.js}"></script>
+</body>

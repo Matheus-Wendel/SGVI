@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/th"
+	style="scroll-behavior: smooth;">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="icon" th:href="@{/layout/images/iconpage.ico}">
+<link rel="stylesheet"
+	th:href="@{/layout/stylesheets/administrativo/administrativo.css}">
+<link rel="stylesheet" th:href="@{/layout/stylesheets/geral/geral.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Staatliches&display=swap">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+
+<title>SGVI | Painel Administrativo</title>
+</head>
+<body>
+	<div class="container-fluid background">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-inicio">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-0"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Painel Administrativo</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="row">
+							<div class="col-md-12 mb-3">
+								<button id="btn-add-artista" type="button"
+									class="btn btn-roxo btn-block">
+									<i class="fas fa-user"></i><br>Gerenciar artistas
+								</button>
+							</div>
+							<div class="col-md-12">
+								<button id="btn-add-show" type="button"
+									class="btn btn-roxo btn-block">
+									<i class="fas fa-map-marked-alt"></i><br>Gerenciar eventos
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-artista"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-1"
+								class="float-left fas fa-chevron-left btn-voltar mt-3"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Consultar artistas</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="row">
+							<div class="col-md-8 mb-3">
+								<input class="form-control" id="artista-nome"
+									placeholder="Nome do artista">
+							</div>
+							<div class="pl-0 col-md-4">
+								<button id="btn-pesquisar-artista" type="button"
+									class=" btn btn-roxo btn-block">Pesquisar</button>
+							</div>
+						</div>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div id="lista-artistas" class="col-md-12"
+							style="overflow: auto; height: 10em;"></div>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="mt-4 col-md-12">
+							<button type="button" id="btn-excluir-artista"
+								class="mr-2 float-right btn btn-danger btn-circle">
+								<i class="fas fa-user-times"></i>
+							</button>
+							<button type="button" id="btn-editar-artista"
+								class="mr-2 float-right btn btn-primary btn-circle">
+								<i class="fas fa-user-edit"></i>
+							</button>
+							<button type="button" id="btn-adicionar-artista"
+								class="mr-2 float-right btn btn-success btn-circle">
+								<i class="fas fa-user-plus"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-artista-novo"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-2"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Cadastrar artista</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<form id="cadastrar-form" action="#" method="post">
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<input class="form-control" name="nome" id="artista-nome-cadastrar"
+										placeholder="Nome do artista"> <input
+										class="form-control mt-3" name="genero" id="artista-genero"
+										placeholder="Gênero musical">
+									<textarea class="mt-3 form-control" name="descricao" rows="5"
+										cols="35" maxlength="200" placeholder="Descrição"
+										style="resize: none;"></textarea>
+									<button type="submit" onclick="formSubmit(event)"
+										class="mt-3 btn btn-roxo btn-block">Cadastrar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-artista-editar"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-3"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Atualizar artista</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="row">
+							<form id="atualizar-artista" action="#" method="post">
+								<div class="col-md-12 mb-3">
+									<label for="artista-nome-editar" class="text-muted">Nome
+										do artista</label> <input class="form-control" name="nome"
+										id="artista-nome-editar" placeholder="Nome do artista">
+									<label for="artista-genero-editar" class="mt-3 text-muted">Gênero
+										musical</label> <input class="form-control " name="genero"
+										id="artista-genero-editar" placeholder="Gênero musical">
+									<label for="artista-descricao-editar" class="mt-3 text-muted">Descrição</label>
+									<textarea class=" form-control" name="descricao"
+										id="artista-descricao-editar" rows="5" cols="35"
+										maxlength="200" placeholder="Descrição" style="resize: none;"></textarea>
+									<button type="submit" class="mt-3 btn btn-roxo btn-block">Atualizar</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-1-evento"
+								class="float-left fas fa-chevron-left btn-voltar mt-3"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Consultar evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="row">
+							<div class="col-md-8 mb-3">
+								<input class="form-control" id="evento-nome"
+									placeholder="Nome do evento">
+							</div>
+							<div class="pl-0 col-md-4">
+								<button id="btn-pesquisar-evento" type="button"
+									class=" btn btn-roxo btn-block">Pesquisar</button>
+							</div>
+						</div>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div id="lista-eventos" class="col-md-12"
+							style="overflow: auto; height: 10em;"></div>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="mt-4 col-md-12">
+							<button type="button" id="btn-excluir-evento"
+								class="mr-2 float-right btn btn-danger btn-circle">
+								<i class="fas fa-user-times"></i>
+							</button>
+							<button type="button" id="btn-editar-evento"
+								class="mr-2 float-right btn btn-primary btn-circle">
+								<i class="fas fa-user-edit"></i>
+							</button>
+							<button type="button" id="btn-adicionar-evento"
+								class="mr-2 float-right btn btn-success btn-circle">
+								<i class="fas fa-user-plus"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+						<form id="cadastrar-form-evento" action="/administrativo/evento/cadastro" method="post" novalidate>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento-novo"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-2-evento"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Cadastrar Evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<input type="hidden" class="form-control" name="horaInicio" id="horaInicio">
+									<input type="hidden" class="form-control" name="horaTermino" id="horaTermino">
+									
+									<input class="form-control" name="nome" id="evento-nome-cadastrar"
+										placeholder="Nome do evento">
+									<div class="row">
+										<div class="mt-3 col-md-6">
+											<label for="hora-inicio" class="text-muted">Data de
+												inicio</label> <input class="form-control" type="date"
+												id="data-inicio" name="horaInicio">
+										</div>
+										<div class="mt-3 col-md-6">
+											<label for="hora-termino" class="text-muted">Data de
+												termino</label> <input class="form-control" type="date"
+												id="data-termino" name="horaTermino">
+										</div>
+									</div>
+									<div class="row">
+										<div class="mt-3 col-md-6">
+											<input class="form-control" id="hora-inicio" type="time" >
+										</div>
+										<div class="mt-3 col-md-6">
+											<input class="form-control" id="hora-termino" type="time">
+										</div>
+									</div>
+									<textarea class="mt-3 form-control" name="descricao"
+										id="evento-descricao" rows="5" cols="35" maxlength="200"
+										placeholder="Descrição" style="resize: none;"></textarea>
+									<input class="mt-3 form-control" id="customizacao.descricao"
+										placeholder="link de customização" name="customizacao.descricao">
+									<div class="col-md-12 d-flex justify-content-center">
+										<button type="button" id="evento-novo-proximo"
+											class=" mt-3 btn btn-roxo">
+											Próximo<i class="ml-2 fas fa-arrow-right"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento-novo-2"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-3-evento"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Cadastrar Evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div id="form-group-cadastro-2" class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<select id="estado" name="endereco.cidade.estado.id" class="form-control">
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select id="cidade" name="endereco.cidade.id" 	class="form-control">
+										<option value="" selected>Cidade</option>
+									</select>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="endereco.bairro" id="bairro" placeholder="Bairro">
+								</div>
+								<div class="col-md-6">
+									<input id="rua" name="endereco.rua" type="text"
+										class="form-control" placeholder="Rua">
+								</div>
+							</div>
+							<div class="row mt-3 mb-3">
+								<div class="col-md-6">
+									<input id="numero" name="endereco.numero"
+										onkeypress="return isNumberKey(event)" type="text"
+										class="form-control" placeholder="Número">
+								</div>
+								<div class="col-md-6">
+									<input id="cep" name="endereco.cep"
+										onkeypress="return isNumberKey(event)" type="text"
+										class="form-control" placeholder="CEP">
+								</div>
+							</div>
+							<div class="col-md-12 d-flex justify-content-center">
+
+								<button type="button" id="evento-novo-proximo-2"
+									class=" mt-3 btn btn-roxo">
+									Próximo<i class="ml-2 fas fa-arrow-right"></i>
+								</button>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento-novo-3"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-2-evento-4"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Cadastrar Evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+
+						<div class="row">
+							<div id="lista-setores" class="col-md-12">
+								<div class="row mt-3">
+
+									<div class="col-md-12">
+										<input type="text" class="form-control" name="setor.descricao"
+											placeholder="Descrição do setor">
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col-md-6">
+										<input type="text" class="form-control" name="setor.valor"
+											placeholder="Valor do setor">
+									</div>
+
+									<div class="col-md-6">
+										<input type="text" class="form-control"
+											name="setor.ingresosDisponiveis"
+											placeholder="quantidade de ingressos">
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="mt-3 row">
+							<div class="col-md-12">
+								<button type="button" id="btn-excluir-setor"
+									class="float-right mt-3 btn btn-roxo ml-3">
+									Excluir setores</i>
+								</button>
+								<button type="button" id="btn-add-setor"
+									class="float-right mt-3 btn btn-roxo">
+									Adicionar setor</i>
+								</button>
+							</div>
+						</div>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="row">
+							<div class="col-md-12 mt-3 mb-3 d-flex justify-content-center">
+								<select id="select-artistas" name="artista.id"
+									class="selectpicker" multiple>
+									<option th:each="artista : ${artistas}"
+										th:value="${artista.id}" th:text="${artista.nome}"></option>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12 d-flex justify-content-center">
+							<button type="submit" id="btn-evento-cadastrar"
+								class=" mt-3 btn btn-roxo">
+								Cadastrar</i>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	
+<!-- 	-----------------------editar -->
+	
+	
+	<form id="editar-form-evento" action="/administrativo/evento/atualizarEvento" method="post" novalidate>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento-editar"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-2-evento-editar"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Editar Evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+							<div class="row">
+								<div class="col-md-12 mb-3">
+									<input type="hidden" class="form-control" name="horaInicio" id="horaInicio-editado">
+									<input type="hidden" class="form-control" name="horaTermino" id="horaTermino-editado">
+									<input class="form-control" name="nome" id="evento-nome-editar"
+										placeholder="Nome do evento">
+									<div class="row">
+										<div class="mt-3 col-md-6">
+											<label for="hora-inicio" class="text-muted">Data de
+												inicio</label> <input class="form-control" type="date"
+												id="data-inicio-editar" name="horaInicio">
+										</div>
+										<div class="mt-3 col-md-6">
+											<label for="hora-termino" class="text-muted">Data de
+												termino</label> <input class="form-control" type="date"
+												id="data-termino-editar" name="horaTermino">
+										</div>
+									</div>
+									<div class="row">
+										<div class="mt-3 col-md-6">
+											<input class="form-control" id="hora-inicio-editar" type="time" >
+										</div>
+										<div class="mt-3 col-md-6">
+											<input class="form-control" id="hora-termino-editar" type="time">
+										</div>
+									</div>
+									<textarea class="mt-3 form-control" name="descricao"
+										id="evento-descricao-editar" rows="5" cols="35" maxlength="200"
+										placeholder="Descrição" style="resize: none;"></textarea>
+									<input class="mt-3 form-control" id="customizacao-descricao-editar"
+										placeholder="link de customização" name="customizacao.descricao">
+									<div class="col-md-12 d-flex justify-content-center">
+										<button type="button" id="evento-editar-proximo"
+											class=" mt-3 btn btn-roxo">
+											Próximo<i class="ml-2 fas fa-arrow-right"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento-editar-2"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-3-evento-editar"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Editar Evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div id="form-group-editar-2" class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<select id="estado-editar" name="endereco.cidade.estado.id" class="form-control">
+									</select>
+								</div>
+								<div class="col-md-6">
+									<select id="cidade-editar" name="endereco.cidade.id" 	class="form-control">
+										<option value="" selected>Cidade</option>
+									</select>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="endereco.bairro" id="bairro-editar" placeholder="Bairro">
+								</div>
+								<div class="col-md-6">
+									<input id="rua-editar" name="endereco.rua" type="text"
+										class="form-control" placeholder="Rua">
+								</div>
+							</div>
+							<div class="row mt-3 mb-3">
+								<div class="col-md-6">
+									<input id="numero-editar" name="endereco.numero"
+										onkeypress="return isNumberKey(event)" type="text"
+										class="form-control" placeholder="Número">
+								</div>
+								<div class="col-md-6">
+									<input id="cep-editar" name="endereco.cep"
+										onkeypress="return isNumberKey(event)" type="text"
+										class="form-control" placeholder="CEP">
+								</div>
+							</div>
+							<div class="col-md-12 d-flex justify-content-center">
+
+								<button type="button" id="evento-editar-proximo-2"
+									class=" mt-3 btn btn-roxo">
+									Próximo<i class="ml-2 fas fa-arrow-right"></i>
+								</button>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card" id="card-administracao-evento-editar-3"
+					style="display: none;">
+					<div class="card-body">
+						<h5 class="card-title text-center">
+							<i id="btn-voltar-4-evento-editar"
+								class="float-left fas fa-chevron-left btn-voltar mt-2"></i>SourceTickets
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted text-center"
+							style="font-size: 16px !important;">Editar Evento</h6>
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+
+						<div class="row">
+							<div id="lista-setores-editar" class="col-md-12">
+								<div class="row mt-3">
+
+									<div class="col-md-12">
+										<input type="text" id="descricao-setor-editar" class="form-control" name="setor.descricao"
+											placeholder="Descrição do setor">
+									</div>
+								</div>
+								<div class="row mt-3">
+									<div class="col-md-6">
+										<input type="text" id="valor-setor-editar" class="form-control" name="setor.valor"
+											placeholder="Valor do setor">
+									</div>
+
+									<div class="col-md-6">
+										<input type="text" id="ingressos-disposiveis-editar" class="form-control"
+											name="setor.ingresosDisponiveis"
+											placeholder="quantidade de ingressos">
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<hr
+							style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(78, 0, 47, 0), rgba(78, 0, 47, 0.75), rgba(78, 0, 47, 0));">
+						<div class="row">
+							<div class="col-md-12 mt-3 mb-3 d-flex justify-content-center">
+								<select id="select-artistas-editar" name="artista.id"
+									class="selectpicker" multiple>
+									<option th:each="artista : ${artistas}"
+										th:value="${artista.id}" th:text="${artista.nome}"></option>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12 d-flex justify-content-center">
+							<button type="submit" id="btn-evento-cadastrar-editar"
+								class=" mt-3 btn btn-roxo">
+								Atualizar</i>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+						</form>
+	
+	
+	
+<!-- --------------------------------------	 -->
+	
+	
+	
+						
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/livequery/1.1.1/jquery.livequery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script th:src="@{/layout/javascripts/administrativo/administrativo-artista.js}"></script>
+	<script th:src="@{/layout/javascripts/administrativo/administrativo-evento.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</body>

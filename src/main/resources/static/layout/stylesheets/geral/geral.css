@@ -1,0 +1,61 @@
+.background{
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+	height: 100vh;
+    background-image: url("/layout/images/No Logo Ubu 03.png");
+}
+
+.btn-roxo{
+	
+	color: white;
+	background-color: #4e002f !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.btn-roxo:hover{
+	
+	color: white;
+    background-color: #880454 !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.form-control:focus {
+	
+    border-color: rgba(78, 0, 47, 0.2);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(78, 0, 47, 0.6);
+}
+
+.has-error{
+  
+  	 border-color: rgba(255, 0, 0, 0.2);
+    box-shadow: inset 0 0px 1px rgba(255, 0, 0, 0.75), 0 0px 1px rgba(255, 0, 0, 0.6);
+}
+  
+.btn-circle {
+    width: 35px;
+    height: 35px;
+    padding: 6px 0px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+  
+.btn-voltar{
+	color: grey;
+	cursor: pointer;
+}
+
+.btn-voltar:hover{
+	color: red;
+}
+
+.ingresso{
+	
+	color: white;
+	border-radius: 7px;
+	background-color:#363636;
+	width: 70vh;
+}
+  
